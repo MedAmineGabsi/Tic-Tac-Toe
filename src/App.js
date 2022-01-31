@@ -82,11 +82,11 @@ const App = () => {
                 <br />
                 {!playerOneError && !playerTwoError ? (
                   <button type="submit" className="enabled">
-                    Submit
+                    Start
                   </button>
                 ) : (
                   <button type="submit" className="disabled" disabled={true}>
-                    Submit
+                    Start
                   </button>
                 )}
               </>
