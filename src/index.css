@@ -5,8 +5,8 @@ body {
   font-family: Poppins;
   background: linear-gradient(
     90deg,
-    rgb(255, 253, 208),
-    rgb(136, 173, 151)
+    rgb(231, 225, 115),
+    rgb(96, 199, 218)
   );
 }
 
@@ -29,6 +29,20 @@ code {
   height: 120px;
   width: 120px;
   font-size: 50px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  height: 120px;
+  width: 120px;
+  font-size: 50px;
+  border: none;
+  background-color: orchid;
+  color: yellow;
+  transition: 0.3s;
 }
 
 .App {
@@ -50,8 +64,8 @@ code {
 input {
   margin: 10px;
   padding: 14px 32px 14px 16px;
-  border-radius: 4px 0 0 4px;
-  border: 2px solid #ff0c0c;
+  border-radius: 10px ;
+  border: 2px solid #ffa20c;
   outline: none;
   width: 320px;
   background: transparent;
@@ -74,31 +88,31 @@ input:focus {
   justify-content: flex-start;
   width: 520px;
   min-height: 200px;
-  background: #4e9ad8;
+  background: #574ed8;
   text-align: center;
   margin: 50px auto;
   border-radius: 10px;
 }
 
 .enabled {
-  background: linear-gradient(90deg, rgb(24, 163, 24), rgb(165, 241, 162));
+  background-color: orange;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   outline: none;
   color: #fff;
-  padding: 16px;
+  padding: 8px;
+  font-size: 18px;
   transition: 0.3s;
 }
 
 .disabled {
-  background: linear-gradient(90deg, rgb(187, 187, 187), rgb(255, 255, 255));
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: default;
   outline: none;
   color: #000;
-  padding: 16px;
+  padding: 8px; 
   transition: 0.3s;
 }
 
