@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Board from "./components/Board";
 
 const App = () => {
+  document.body.style.background =
+    "linear-gradient(90deg,rgb(231, 225, 115),rgb(96, 199, 218))";
+  document.body.style.color = "#000";
   const [inGame, setInGame] = useState(false);
 
   const [playerOne, setPlayerOne] = useState("");
@@ -47,7 +50,12 @@ const App = () => {
         TIC TAC TOE
       </h1>
       {inGame ? (
-        <Board playerOne={playerOne} playerTwo={playerTwo} playerOneColor={colorOne} playerTwoColor={colorTwo}/>
+        <Board
+          playerOne={playerOne}
+          playerTwo={playerTwo}
+          playerOneColor={colorOne}
+          playerTwoColor={colorTwo}
+        />
       ) : (
         <div className="menu">
           <>

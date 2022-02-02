@@ -6,6 +6,8 @@ import sound from "./win.mp3";
 const winSound = new Audio(sound);
 
 const Board = (props) => {
+  document.body.style.background = "#000"
+  document.body.style.color = "#fff"
   const [square, setSquare] = useState(Array(9).fill(null));
   const [X, setX] = useState(true);
 

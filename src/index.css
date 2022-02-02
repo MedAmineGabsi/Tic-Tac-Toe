@@ -14,6 +14,7 @@ body {
     rgb(231, 225, 115),
     rgb(96, 199, 218)
   );
+  transition: 0.3s;
 }
 
 code {
