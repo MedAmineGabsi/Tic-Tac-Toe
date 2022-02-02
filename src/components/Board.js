@@ -57,7 +57,6 @@ const Board = (props) => {
       }
     });
   } else {
-    X ? document.getElementById("status").style.color = "red": document.getElementById("status").style.color = "blue"
     status = "Turn of: " + (X ? props.playerOne : props.playerTwo);
   }
 
@@ -69,14 +68,20 @@ const Board = (props) => {
   };
   const renderSquare = (position) => {
     return (
-      <Square value={square[position]} onClick={() => handleClick(position)} id={position}/>
+      <Square
+        value={square[position]}
+        onClick={() => handleClick(position)}
+        id={position}
+      />
     );
   };
 
   const handleClick = (position) => {
     const squares = square.slice();
     if (squares[position] === null) {
-      squares[position] = X ? document.getElementById(position).style.color = "red" : document.getElementById(position).style.color = "blue";
+      squares[position] = X
+        ? (document.getElementById(position).style.color = props.playerOneColor)
+        : (document.getElementById(position).style.color = props.playerTwoColor);
       squares[position] = X ? "X" : "O";
       setSquare(squares);
       setX(!X);

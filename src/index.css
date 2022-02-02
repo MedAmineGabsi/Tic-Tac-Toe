@@ -1,7 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
+  padding: 0;
   font-family: Poppins;
   background: linear-gradient(
     90deg,
@@ -61,7 +67,7 @@ code {
   display: none;
 }
 
-input {
+.my-input {
   margin: 10px;
   padding: 14px 32px 14px 16px;
   border-radius: 10px ;
@@ -74,11 +80,11 @@ input {
   transition: 0.3s;
 }
 
-input::placeholder {
+.my-input::placeholder {
   color: #fff;
 }
 
-input:focus {
+.my-input:focus {
   border-color: rgb(25, 192, 243);
 }
 
@@ -124,3 +130,10 @@ input:focus {
   color: red;
 }
 
+.color{
+  border: none;
+  padding: 0;
+  border-radius: 20px;
+  height: 30px;
+  width: 30px;
+}

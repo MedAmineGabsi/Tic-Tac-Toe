@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Board from "./components/Board";
 
 const App = () => {
@@ -6,6 +6,8 @@ const App = () => {
 
   const [playerOne, setPlayerOne] = useState("");
   const [playerTwo, setPlayerTwo] = useState("");
+  const [colorOne, setColorOne] = useState("#fff");
+  const [colorTwo, setColorTwo] = useState("#fff");
 
   const [playerOneError, setPlayerOneError] = useState(" ");
   const [playerTwoError, setPlayerTwoError] = useState(" ");
@@ -13,7 +15,7 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const user = { playerOne, playerTwo };
+    const user = { playerOne, playerTwo, colorOne, colorTwo };
     console.log(user);
     setInGame(true);
   };
@@ -45,7 +47,7 @@ const App = () => {
         TIC TAC TOE
       </h1>
       {inGame ? (
-        <Board playerOne={playerOne} playerTwo={playerTwo} />
+        <Board playerOne={playerOne} playerTwo={playerTwo} playerOneColor={colorOne} playerTwoColor={colorTwo}/>
       ) : (
         <div className="menu">
           <>
@@ -57,6 +59,14 @@ const App = () => {
                     value={playerOne}
                     onChange={handlePlayerOne}
                     name="Player1"
+                    className="my-input"
+                    required
+                  />
+                  <input
+                    type="color"
+                    className="color"
+                    value={colorOne}
+                    onChange={(e) => setColorOne(e.target.value)}
                     required
                   />
                   <br />
@@ -71,6 +81,14 @@ const App = () => {
                   value={playerTwo}
                   onChange={handlePlayerTwo}
                   name="player 2"
+                  className="my-input"
+                  required
+                />
+                <input
+                  type="color"
+                  className="color"
+                  value={colorTwo}
+                  onChange={(e) => setColorTwo(e.target.value)}
                   required
                 />
                 <br />
