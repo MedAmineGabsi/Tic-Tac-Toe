@@ -74,7 +74,7 @@ code {
   border-radius: 10px ;
   border: 2px solid #ffa20c;
   outline: none;
-  width: 320px;
+  width: auto;
   background: transparent;
   color: #fff;
   font-size: 20px;
@@ -91,14 +91,16 @@ code {
 
 .menu{
   display: flex;
-  flex-direction: column;
+  padding: 0;
+  flex-wrap: wrap;
   justify-content: flex-start;
-  width: 520px;
+  width: auto;
   min-height: 200px;
   background: #574ed8;
   text-align: center;
   margin: 50px auto;
   border-radius: 10px;
+  max-width: 400px;
 }
 
 .enabled {
