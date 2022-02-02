@@ -57,6 +57,7 @@ const Board = (props) => {
       }
     });
   } else {
+    X ? document.getElementById("status").style.color = "red": document.getElementById("status").style.color = "blue"
     status = "Turn of: " + (X ? props.playerOne : props.playerTwo);
   }
 
@@ -109,7 +110,7 @@ const Board = (props) => {
         {renderSquare(8)}
       </div>
 
-      <h3>{status}</h3>
+      <h3 id="status">{status}</h3>
       <button
         style={{
           border: "none",
