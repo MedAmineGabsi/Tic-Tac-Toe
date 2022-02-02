@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Square from "./Square";
 import swal from "sweetalert";
+import sound from "./win.mp3";
+
+const winSound = new Audio(sound);
 
 const Board = (props) => {
   const [square, setSquare] = useState(Array(9).fill(null));
@@ -26,6 +29,7 @@ const Board = (props) => {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
+        winSound.play();
         return squares[a];
       }
     }
@@ -36,14 +40,32 @@ const Board = (props) => {
   if (winner) {
     status =
       "The Winner is " + (winner === "X" ? props.playerOne : props.playerTwo);
+    swal({
+      title:
+        "Congrat " +
+        (winner === "X" ? props.playerOne : props.playerTwo) +
+        "🤯🥁",
+      text: "Good Job you won the game",
+      icon: "success",
+      buttons: ["Restart the game", "Continue the round"],
+      dangerMode: false,
+    }).then((ok) => {
+      if (ok) {
+        reset();
+      } else {
+        reset();
+      }
+    });
   } else {
     status = "Turn of: " + (X ? props.playerOne : props.playerTwo);
   }
 
-  const reset = () =>{
-    setSquare(Array(9).fill(null))
-    winner = null
-  }
+  const reset = () => {
+    setSquare(Array(9).fill(null));
+    winner = null;
+    winSound.pause();
+    winSound.currentTime = 0;
+  };
   const renderSquare = (position) => {
     return (
       <Square value={square[position]} onClick={() => handleClick(position)} />
