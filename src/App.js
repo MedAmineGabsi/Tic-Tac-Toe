@@ -6,11 +6,14 @@ const App = () => {
     "linear-gradient(90deg,rgb(231, 225, 115),rgb(96, 199, 218))";
   document.body.style.color = "#000";
   const [inGame, setInGame] = useState(false);
+  const [round, setRound] = useState(1);
 
   const [playerOne, setPlayerOne] = useState("");
   const [playerTwo, setPlayerTwo] = useState("");
-  const [colorOne, setColorOne] = useState("#fff");
-  const [colorTwo, setColorTwo] = useState("#fff");
+  const [colorOne, setColorOne] = useState("#32fc41");
+  const [colorTwo, setColorTwo] = useState("#326ffc");
+
+  const [colorRound, setColorRound] = useState("#000")
 
   const [playerOneError, setPlayerOneError] = useState(" ");
   const [playerTwoError, setPlayerTwoError] = useState(" ");
@@ -18,7 +21,7 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const user = { playerOne, playerTwo, colorOne, colorTwo };
+    const user = { playerOne, playerTwo, colorOne, colorTwo, round };
     console.log(user);
     setInGame(true);
   };
@@ -44,6 +47,14 @@ const App = () => {
       setPlayerTwoError("The nickname must be at least 3 characters or more");
     }
   };
+
+  const renderRounds = (round) => {
+    var options = [];
+    for (let i = 0; i < round; i++) {
+      options.push(i + 1);
+    }
+    return options;
+  };
   return (
     <div className="App">
       <h1 className="header" onClick={() => setInGame(false)}>
@@ -55,6 +66,8 @@ const App = () => {
           playerTwo={playerTwo}
           playerOneColor={colorOne}
           playerTwoColor={colorTwo}
+          round={round}
+          color={colorRound}
         />
       ) : (
         <div className="menu">
@@ -105,6 +118,30 @@ const App = () => {
                 ) : (
                   ""
                 )}
+                <br />
+                <label style={{ color: "#fff" }}>Background Color</label>
+                <br/>
+                <input
+                  type="color"
+                  className="color"
+                  value={colorRound}
+                  onChange={(e) => setColorRound(e.target.value)}
+                  required
+                />
+                <br />
+                <label style={{ color: "#fff" }}>Rounds</label>
+                <br />
+                <select
+                  value={round}
+                  onChange={(e) => setRound(e.target.value)}
+                >
+                  {renderRounds(10).map((e) => (
+                    <option value={e} className="rounds">
+                      {e}
+                    </option>
+                  ))}
+                </select>
+                <br />
                 <br />
                 {!playerOneError && !playerTwoError ? (
                   <button type="submit" className="enabled">

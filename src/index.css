@@ -129,8 +129,8 @@ code {
   font-size: 10px;
   display: flex;
   justify-content: flex-start;
-  margin-left: 72px;
-  color: red;
+  margin-left: 13px;
+  color: rgb(148, 46, 46);
 }
 
 .color{
@@ -139,4 +139,9 @@ code {
   border-radius: 20px;
   height: 30px;
   width: 30px;
+}
+
+.rounds{
+  border: none;
+  margin: 5px;
 }

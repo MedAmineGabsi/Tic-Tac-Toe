@@ -6,10 +6,13 @@ import sound from "./win.mp3";
 const winSound = new Audio(sound);
 
 const Board = (props) => {
-  document.body.style.background = "#000"
-  document.body.style.color = "#fff"
+  document.body.style.background = props.color;
+  document.body.style.color = "#fff";
   const [square, setSquare] = useState(Array(9).fill(null));
   const [X, setX] = useState(true);
+  const [scoreX, setScoreX] = useState(0);
+  const [scoreO, setScoreO] = useState(0);
+  const [actualRound, setActualRound] = useState(1);
 
   const calculateWinner = (squares) => {
     const lines = [
@@ -31,33 +34,63 @@ const Board = (props) => {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        winSound.play();
         return squares[a];
       }
     }
     return null;
   };
+
+  const next = () => {
+    setSquare(Array(9).fill(null));
+    if (winner === "X") {
+      setScoreX(scoreX + 1);
+    } else {
+      setScoreO(scoreO + 1);
+    }
+    setActualRound(actualRound + 1);
+    winner = null;
+    winSound.pause();
+    winSound.currentTime = 0;
+  };
+
   var winner = calculateWinner(square);
   let status;
+  if (actualRound > props.round) {
+    winSound.play();
+    setActualRound(1)
+    if (scoreX > scoreO) {
+      swal({
+        title: "Congrat " + props.playerOne + "🤯🥁",
+        text: "Good Job you won the game",
+        icon: "success",
+        button: "Restart",
+        dangerMode: false,
+      }).then((ok) => {
+        if (ok) {
+          reset();
+        }
+      });
+    }
+    if (scoreO > scoreX) {
+      swal({
+        title: "Congrat " + props.playerTwo + "🤯🥁",
+        text: "Good Job you won the game",
+        icon: "success",
+        button: "Restart",
+        dangerMode: false,
+      }).then((ok) => {
+        if (ok) {
+          reset();
+        }
+      });
+    }
+  }
+
   if (winner) {
     status =
       "The Winner is " + (winner === "X" ? props.playerOne : props.playerTwo);
-    swal({
-      title:
-        "Congrat " +
-        (winner === "X" ? props.playerOne : props.playerTwo) +
-        "🤯🥁",
-      text: "Good Job you won the game",
-      icon: "success",
-      buttons: ["Restart the game", "Continue the round"],
-      dangerMode: false,
-    }).then((ok) => {
-      if (ok) {
-        reset();
-      } else {
-        reset();
-      }
-    });
+    swal(status, "", "success");
+    next();
   } else {
     status = "Turn of: " + (X ? props.playerOne : props.playerTwo);
   }
@@ -65,6 +98,8 @@ const Board = (props) => {
   const reset = () => {
     setSquare(Array(9).fill(null));
     winner = null;
+    setScoreX(0);
+    setScoreO(0);
     winSound.pause();
     winSound.currentTime = 0;
   };
@@ -83,7 +118,8 @@ const Board = (props) => {
     if (squares[position] === null) {
       squares[position] = X
         ? (document.getElementById(position).style.color = props.playerOneColor)
-        : (document.getElementById(position).style.color = props.playerTwoColor);
+        : (document.getElementById(position).style.color =
+            props.playerTwoColor);
       squares[position] = X ? "X" : "O";
       setSquare(squares);
       setX(!X);
@@ -99,8 +135,15 @@ const Board = (props) => {
 
   return (
     <div className="board">
-      <div className="board-row">{props.playerOne} = X</div>
-      <div className="board-row">{props.playerTwo} = O</div>
+      <h3>
+        Round: {actualRound}/{props.round}
+      </h3>
+      <div className="board-row">
+        {props.playerOne}: {scoreX}
+      </div>
+      <div className="board-row">
+        {props.playerTwo}: {scoreO}
+      </div>
       <div className="board-row">
         {renderSquare(0)}
         {renderSquare(1)}
